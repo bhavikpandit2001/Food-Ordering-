@@ -1,7 +1,8 @@
+import { restaurantSchema } from "../../../lib/models/restaurantsModel";
 import connectDB from "../../../lib/db";
 import { orderSchema } from "../../../lib/models/ordersModel";
-import mongoose from "mongoose";
 import { NextResponse } from "next/server";
+import { foodSchema } from "../../../lib/models/foodsModel";
 
 
 export async function POST(request) {
@@ -14,28 +15,29 @@ export async function POST(request) {
         success = true
         result = newOrder
     }
-    return NextResponse.json({ result, success, message: "order created..." },{status: 200})
+    return NextResponse.json({ result, success, message: "order created..." }, { status: 200 })
 }
 
-// export async function GET(request) {
-//     const userId = request.nextUrl.searchParams.get('id');
-//     let success = false
-//     await mongoose.connect(connectionStr, { useNewUrlParser: true })
-//     let result = await orderSchema.find({ user_id: userId });
-//     if (result) {
-//         let restoData = await Promise.all(
-//             result.map(async (item) => {
-//                 let restoInfo = {};
-//                 restoInfo.data = await restaurantSchema.findOne({ _id: item.resto_id })
-//                 restoInfo.amount = item.amount;
-//                 restoInfo.status = item.status;
-//                 return restoInfo;
-//             })
-//         )
-//         result = restoData;
-//         success = true
-//     }
+export async function GET(request) {
+    const userId = request.nextUrl.searchParams.get('id');
+    console.log(userId)
+    let success = false
+    let result;
+    let orders = await orderSchema.find({ userId: userId });
+    if (orders) {
+        let restoData = await Promise.all(
+            orders.map(async (item) => {
+                let restoInfo = {};
+                restoInfo.order = item
+                restoInfo.restaurant = await restaurantSchema.findOne({ _id: item.restaurantId })
+                restoInfo.foodItems = await foodSchema.find({ _id: { $in: item.fooditemsId } })
+                return restoInfo;
+            })
+        )
+        result = restoData;
+        success = true
+    }
 
-//     return NextResponse.json({ result,success })
+    return NextResponse.json({ result, success })
 
-// }
+}

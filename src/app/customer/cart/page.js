@@ -83,7 +83,7 @@ const Cart = () => {
                             </div>
                             <div style={{ textAlign: "right" }}>
                                 <div>{foodCharges}</div>
-                                <div>{tax}</div>
+                                <div>{Number(tax.toFixed(2))}</div>
                                 <div>{DELIVERY_CHARGES}</div>
                                 <div>{total}</div>
                             </div>

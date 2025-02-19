@@ -34,7 +34,7 @@ const Order = () => {
         let user = JSON.parse(localStorage.getItem('customer'));
         let cart = JSON.parse(localStorage.getItem('cart'));
         let foodItemIds = cart.map((item) => item._id);
-        let resto_id = cart[0].resto_id;
+        let resto_id = cart[0].restaurantId;
         let orderObj = {
             userId: user?._id,
             restaurantId: resto_id,

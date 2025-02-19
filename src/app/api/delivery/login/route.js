@@ -1,5 +1,5 @@
 import { deliveryPartnersSchema } from "../../../lib/models/deliverypartnersModel";
-import connectDB from "../../lib/db";
+import connectDB from "../../../lib/db";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
@@ -9,7 +9,7 @@ export async function POST(request) {
     let result;
     let success = false
 
-    let deliveryUser = await deliveryPartnersSchema.findOne({ email: payload.mobile, password: payload.password })
+    let deliveryUser = await deliveryPartnersSchema.findOne({ mobile: payload.mobile, password: payload.password })
     if (!deliveryUser) {
         return NextResponse.json({ result: {}, success, messege: "Invalid credentials..."  }, { status: 401 })
     }else{

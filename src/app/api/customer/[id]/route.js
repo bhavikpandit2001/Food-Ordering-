@@ -10,7 +10,7 @@ export async function GET(request, content) {
     let success = false;
 
     const details = await restaurantSchema.findOne({ _id: id })
-    const foodItems = await foodSchema.find({ resto_id: id })
+    const foodItems = await foodSchema.find({ restaurantId: id })
 
     if(details || foodItems){
         success = true 

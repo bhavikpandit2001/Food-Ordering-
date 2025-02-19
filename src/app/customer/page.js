@@ -13,6 +13,7 @@ export default function Home() {
   const [showLocation, setShowLocation] = useState(false);
   const router = useRouter();
 
+
   useEffect(() => {
     loadLocations();
     loadRestaurants()
@@ -27,8 +28,12 @@ export default function Home() {
   }
 
   const loadRestaurants = async (params) => {
+    const user = JSON.parse(localStorage.getItem("customer"))
+    const loggedinUser = user ? user : null
     let url = `http://localhost:3000/api/customer`;
-    if (params?.location) {
+    if (loggedinUser) {
+      url = `${url}?location=${loggedinUser.city}`
+    } else if (params?.location) {
       url = `${url}?location=${params.location}`
     } else if (params?.restaurant) {
       url = `${url}?restaurant=${params.restaurant}`
@@ -68,8 +73,8 @@ export default function Home() {
       </div>
       <div className="restaurant-list-container">
         {
-          restaurants ? restaurants.map((item) => (
-            <div onClick={() => router.push(`/customer/explore/${item.name}?id=${item._id}`)} className="restaurant-wrapper">
+          restaurants ? restaurants.map((item, key) => (
+            <div key={key} onClick={() => router.push(`/customer/explore/${item.name}?id=${item._id}`)} className="restaurant-wrapper">
               <div style={{ display: "flex" }}>
                 <div>
                   <img width={100} src={item?.image} alt="restaurant-image" />

@@ -8,7 +8,7 @@ export async function GET(request,content){
     const id = content.params.id
     let success=false;
     let result;
-    const data = await foodSchema.find({resto_id:id});
+    const data = await foodSchema.find({restaurantId:id});
     if(data){
         success=true
         result = data

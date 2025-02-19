@@ -17,7 +17,7 @@ const Profile = () => {
         </div>
         <div className='profile-container'>
           <div className='profile-image'>
-            <img src={loggedinUser?.image} alt='restaurant image'/>
+            <img width={"100%"} src={loggedinUser?.image} alt='restaurant image'/>
           </div>
           <div className='detail-container'>
               <div style={{fontSize:"50px", fontWeight:"600"}}>{loggedinUser?.name}</div>

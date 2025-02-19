@@ -341,3 +341,38 @@ table th {
   padding: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+.order-details-container .details-layout{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+.details-layout .resto-user-details{
+  width: 60%;
+}
+
+.resto-user-details .user-details{
+  display: flex;
+  justify-content: space-between;
+}
+
+.details-layout .food-details{
+  width: 35%;
+}
+
+.delivery-food-list .food-wrapper{
+  display: flex;
+}
+
+.delivery-food-list .price-wrapper{
+  margin-top: 20px;
+  border-top: 1px solid black;
+  justify-content: space-between;
+  display: flex;
+}
+
+.order-list{
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
